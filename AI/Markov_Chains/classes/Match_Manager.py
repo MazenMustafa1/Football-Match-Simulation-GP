@@ -18,12 +18,14 @@ class Match_Manager:
         ball_position = "Central"
         half_time_called = False  # Prevents multiple half-time prints
 
-        while time.time() - start_time < 60:
+        while time.time() - start_time < 30:
             elapsed_time = time.time() - start_time
 
-            if elapsed_time >= 30 and not half_time_called:
+            if elapsed_time >= 15 and not half_time_called:
                 print("\n--- Half Time! ---\n")
                 half_time_called = True  # Ensure it's printed only once
+                self.current_team = TeamEnum.B
+                ball_position = "Central"
 
             if self.current_team == TeamEnum.A:
                 result, new_position = self.team_a.play(ball_position)

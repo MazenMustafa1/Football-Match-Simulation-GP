@@ -32,7 +32,7 @@ class Team:
 
             # Make commentary text
             describe_possession = describe_possession + ' - ' + self.description[s]
-
+            from_position = self.description[s]
             # Cumulative sum of in play probabilities
             c_sum = np.cumsum(self.matrix[s, :])
             new_s = np.sum(r > c_sum)

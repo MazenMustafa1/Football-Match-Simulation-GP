@@ -6,12 +6,13 @@ from sklearn import metrics
 from sklearn.linear_model import LogisticRegression
 from tabulate import tabulate
 
-
+import warnings
+warnings.simplefilter("ignore", UserWarning)
 # Database connection parameters
 conn = psycopg2.connect(
     dbname="Footex",
     user="postgres",
-    password="200602",
+    password="00000",
     host="localhost",
     port=5432
 )
@@ -173,9 +174,9 @@ df_shot = pd.concat([df_shot, shot_technique_dummies, shot_type_dummies], axis=1
 
 
 df_shot['goal'] = df_shot.apply(lambda row:1 if row['shot_outcome']=='Goal' else 0, axis=1)
-print(tabulate(df_shot.head(10), headers='keys', tablefmt='psql'))
-print(df_shot['shot_technique'].unique())
-print(df_shot['shot_type'].unique())
+# print(tabulate(df_shot.head(10), headers='keys', tablefmt='psql'))
+# print(df_shot['shot_technique'].unique())
+# print(df_shot['shot_type'].unique())
 
 
 # Modelling
@@ -194,12 +195,12 @@ XG_model = LogisticRegression()
 XG_model.fit(X, y)
 y_pred = XG_model.predict_proba(X)[:, 1]
 metrics.r2_score(y, y_pred)
-print(metrics.r2_score(y, y_pred))
-print(metrics.r2_score(y, df_shot['statsbomb_xg']))
+# print(metrics.r2_score(y, y_pred))
+# print(metrics.r2_score(y, df_shot['statsbomb_xg']))
 
 df_shot['xG'] = y_pred
 # print(tabulate(df_shot.head(10), headers='keys', tablefmt='psql'))
 # print(tabulate(df_matches.head(10), headers='keys', tablefmt='psql'))
 # print(tabulate(df_evaluate.head(10), headers='keys', tablefmt='psql'))
 # print(tabulate(get_team_open_play_shots('Barcelona').head(50), headers='keys', tablefmt='psql'))
-evaluate_single_match(3773386)
+# evaluate_single_match(3773386)
