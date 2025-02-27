@@ -1,8 +1,9 @@
-import numpy as np
 from AI.Markov_Chains.classes.Match_Manager import Match_Manager
 from AI.Markov_Chains.classes.Team import Team
 from AI.Markov_Chains.classes.StatsBomb import StatsBomb
 
+
+import numpy as np
 
 
 team_a = 'Real Madrid'
